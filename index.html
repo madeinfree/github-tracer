@@ -6,112 +6,8 @@
 <script src="./build/react-dom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<style>
-body {
-  color: #666;
-  background-color: #fff;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 13px;
-  margin: 0;
-  padding: 0;
-}
-h1{
-  font-size: 13px;
-  margin: 0;
-  padding: 0;
-}
-h1 a{
-  display: block;
-  line-height: 20px;
-  padding: 6px 20px;
-  border-bottom: 1px solid #ddd;
-}
-#projects-count{
-  font-weight: normal;
-  color: #ccc;
-  display: inline-block;
-  line-height: 1.3em;
-  margin-left: .5em;
-}
-a{
-  color: #666;
-  background-color: transparent;
-  text-decoration: none;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  -ms-transition: all .2s;
-  -o-transition: all .2s;
-  transition: all .2s;
-}
-a:hover{
-  color: #fff;
-  background-color: #666;
-}
-#repos-list{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-#repos-list li{
-  display: inline;
-}
-#repos-list li a{
-  position: relative;
-  display: block;
-  line-height: 20px;
-  padding: 6px 20px;
-  overflow: hidden;
-}
-#repos-list li:nth-child(odd) a{
-  background-color: #fafafa;
-}
-#repos-list li a:hover{
-  color: #fff;
-  background-color: #666;
-}
-#repos-list li.fork a:before{
-  color: #999;
-  content: '\2646';
-  position: absolute;
-  left: 5px;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-#repos-list li a .desc{
-  color: #ccc;
-  display: inline-block;
-  line-height: 1.3em;
-  margin-left: .5em;
-}
-#projects-info,
-#repos-list li a .info{
-  float: right;
-  clear: right;
-}
-b.stars,
-b.forks{
-  font-weight: bold;
-  display: inline-block;
-}
-b.stars:before,
-b.forks:before{
-  display: inline-block;
-  font-size: 14px;
-  width: 20px;
-  text-align: center;
-}
-b.stars:before{
-  content: '\2605';
-}
-b.forks:before{
-  content: '\2646';
-}
-</style>
 <body>
-  <h1><a href="https://github.com/madeinfree"><span id="projects-info"></span>madeinfree<span id="projects-count"></span> </a></h1>
+  <h1 class='text-info text-center'><a href="https://github.com/madeinfree">Madeinfree's repo tracer</a></h1>
   <ul id="repos-list"></ul>
   <div id="viewport"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -153,7 +49,7 @@ b.forks:before{
       render: function() {
         return (
           <div>
-            <div>
+            <div className='text-center'>
               Total repos: { this.props.data.length }
               {' '} Total forks <i className='glyphicon glyphicon-copy'></i> : { this.countForks(this.props.data) }
               {' '} Total stars <i className='glyphicon glyphicon-star'></i> : { this.countStars(this.props.data) }

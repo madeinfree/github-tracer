@@ -25,3 +25,4 @@ Well done!
 
 * [ ] Search bar
 * [ ] Refactor file path
+* [ ] Infinite scroll
