@@ -116,6 +116,7 @@ b.forks:before{
   <div id="viewport"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type='text/babel'>
+    var user = 'madeinfree';
     var ViewPort = React.createClass({
       render_card: function() {
         return this.props.data.sort().map(function(repo) {
@@ -164,7 +165,7 @@ b.forks:before{
         )
       }
     });
-    var fetch = $.ajax('https://api.github.com/users/madeinfree/repos?&per_page=999');
+    var fetch = $.ajax(`https://api.github.com/users/${user}/repos?&per_page=999`);
     fetch.then(function(data){
       console.log(data);
       ReactDOM.render(
