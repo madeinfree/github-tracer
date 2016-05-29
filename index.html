@@ -125,7 +125,8 @@ b.forks:before{
                 <div className="caption">
                   <h3>{ repo.name }</h3>
                   <p>{ repo.description === '' ? 'no description' : repo.description.slice(0, 50) }...</p>
-                  <p><a href={ repo.html_url } className="btn btn-default" role="button">連結</a></p>
+                  <p><i className='glyphicon glyphicon-copy'></i> { repo.forks } {'  '} <i className='glyphicon glyphicon-star'></i> { repo.stargazers_count }</p>
+                  <p><a href={ repo.html_url } className="btn btn-default" role="button">Link</a></p>
                 </div>
               </div>
             </div>
@@ -153,8 +154,8 @@ b.forks:before{
           <div>
             <div>
               Total repos: { this.props.data.length }
-              {' '} Total forks: { this.countForks(this.props.data) }
-              {' '} Total stars: { this.countStars(this.props.data) }
+              {' '} Total forks <i className='glyphicon glyphicon-copy'></i> : { this.countForks(this.props.data) }
+              {' '} Total stars <i className='glyphicon glyphicon-star'></i> : { this.countStars(this.props.data) }
             </div>
             <div className="row">
               { this.render_card() }
