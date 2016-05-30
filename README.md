@@ -1,7 +1,7 @@
 # Github Tracer
 Simply for you to trace your github repo, used github api, jQuery and React.
 
-![Github-tracer](http://i.imgur.com/AAGo1Cg.png)
+![Github-tracer](http://i.imgur.com/iVs9Gzg.png)
 
 # Installation
 
