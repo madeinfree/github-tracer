@@ -6,9 +6,65 @@
 <script src="./build/react-dom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<style>
+  body {
+    background: #ecf0f1;
+  }
+  #viewport {
+    padding: 60px;
+    padding-top: 0px;
+  }
+  .topTitle {
+    text-shadow: 0 1px 0 #ccc,
+     0 2px 0 #c9c9c9,
+     0 3px 0 #bbb,
+     0 4px 0 #b9b9b9,
+     0 5px 0 #aaa,
+     0 6px 1px rgba(0,0,0,.1),
+     0 0 5px rgba(0,0,0,.1),
+     0 1px 3px rgba(0,0,0,.3),
+     0 3px 5px rgba(0,0,0,.2),
+     0 5px 10px rgba(0,0,0,.25),
+     0 10px 10px rgba(0,0,0,.2),
+     0 20px 20px rgba(0,0,0,.15);
+  }
+  .topTitle a {
+    color: #fff
+  }
+  .count {
+    color: #000;
+  }
+  .ani {
+    cursor: pointer;
+    opacity: .9;
+    transition: all .3s;
+  }
+  .ani:hover {
+    opacity: 1;
+    transform: rotate(1deg);
+  }
+  .card-title {
+    background-color: #2980b9;
+    height: 100px;
+    border-radius: 3px 3px 0 0;
+    text-align: center;
+    word-break: break-all;
+  }
+  .card-title h3 {
+    color: rgba(255,255,255,0.6);
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    line-height: 100px;
+  }
+  .card {
+    height: 150px;
+    font-weight: 500;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+    word-break: break-all;
+    border-radius: 2px;
+  }
+</style>
 <body>
-  <h1 class='text-info text-center'><a href="https://github.com/madeinfree">Madeinfree's repo tracer</a></h1>
-  <ul id="repos-list"></ul>
+  <h1 class='text-info text-center topTitle'><a href="https://github.com/madeinfree">Madeinfree's Repo Tracer</a></h1>
   <div id="viewport"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type='text/babel'>
@@ -17,16 +73,19 @@
       render_card: function() {
         return this.props.data.sort().map(function(repo) {
           return (
-            <div className="col-sm-6 col-md-4">
-              <div className="thumbnail">
-                <div className="caption">
+            <a href={repo.html_url}>
+              <div className="col-sm-6 col-md-4 ani">
+                <div className='card-title'>
                   <h3>{ repo.name }</h3>
-                  <p>{ repo.description === '' ? 'no description' : repo.description.slice(0, 50) }...</p>
-                  <p><i className='glyphicon glyphicon-copy'></i> { repo.forks } {'  '} <i className='glyphicon glyphicon-star'></i> { repo.stargazers_count }</p>
-                  <p><a href={ repo.html_url } className="btn btn-default" role="button">Link</a></p>
+                </div>
+                <div className="thumbnail card">
+                  <div className="caption">
+                    <p>{ repo.description === '' ? 'no description' : repo.description }</p>
+                    <p className='text-right'><i className='glyphicon glyphicon-copy'></i> { repo.forks } {'  '} <i className='glyphicon glyphicon-star'></i> { repo.stargazers_count }</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           )
         })
       },
@@ -49,11 +108,11 @@
       render: function() {
         return (
           <div>
-            <div className='text-center'>
-              Total repos: { this.props.data.length }
-              {' '} Total forks <i className='glyphicon glyphicon-copy'></i> : { this.countForks(this.props.data) }
-              {' '} Total stars <i className='glyphicon glyphicon-star'></i> : { this.countStars(this.props.data) }
-            </div>
+            <h3 className='text-center count'>
+              {' '}<i className='glyphicon glyphicon-file'></i> - { this.props.data.length }
+              {' '}<i className='glyphicon glyphicon-copy'></i> - { this.countForks(this.props.data) }
+              {' '}<i className='glyphicon glyphicon-star'></i> - { this.countStars(this.props.data) }
+            </h3>
             <div className="row">
               { this.render_card() }
             </div>
@@ -63,7 +122,6 @@
     });
     var fetch = $.ajax(`https://api.github.com/users/${user}/repos?&per_page=999`);
     fetch.then(function(data){
-      console.log(data);
       ReactDOM.render(
         <ViewPort data={ data }/>,
         document.getElementById('viewport')
